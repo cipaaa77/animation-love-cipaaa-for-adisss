@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Love Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom right, #ffcccc, #ff99cc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            transform: rotate(45deg);
+            animation: fly 8s linear infinite;
+        }
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+        }
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
+        @keyframes fly {
+            0% {
+                transform: rotate(45deg) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(45deg) translateY(-800px);
+                opacity: 0;
+            }
+        }
+
+        /* Random heart animation */
+        .heart:nth-child(odd) {
+            animation-duration: 10s;
+        }
+        .heart:nth-child(even) {
+            animation-duration: 12s;
+        }
+
+        /* Popup styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .popup p {
+            font-size: 20px;
+            color: #ff0066;
+        }
+
+        .popup button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff0066;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Heart Animation Container -->
+    <div id="hearts-container"></div>
+
+    <!-- Popup Message -->
+    <div class="popup" id="popup">
+        <p>I love u too sayangggkuuu, semangattt menjalani hari-hari dan kegiatannyaaa,<br>
+        CIPAAA ALWAYS HERE FOR U MUACHHH MUACHHH MUACHHH 💋</p>
+        <button onclick="closePopup()">Close 💋</button>
+    </div>
+
+    <script>
+        // Generate multiple hearts
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                const randomLeft = Math.floor(Math.random() * window.innerWidth);
+                const randomDelay = Math.random() * 5;
+                const randomSize = Math.random() * 20 + 10;
+                
+                heart.style.left = `${randomLeft}px`;
+                heart.style.width = `${randomSize}px`;
+                heart.style.height = `${randomSize}px`;
+                heart.style.animationDelay = `${randomDelay}s`;
+                
+                container.appendChild(heart);
+            }
+        }
+
+        // Show popup after animation ends
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'block';
+        }
+
+        // Close popup
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+
+        // Initiate heart creation
+        createHearts();
+
+        // Show popup after some delay (8 seconds)
+        setTimeout(showPopup, 8000);
+    </script>
+</body>
+</html>
